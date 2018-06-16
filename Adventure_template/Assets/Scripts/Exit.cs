@@ -9,15 +9,15 @@ public class Exit : Interactable {
    // [Header("New Scene")]
     [SerializeField]
     private string sceneToGo;
-   // [SerializeField][Tooltip("Set to true if you want to enter a room which is on the right, if the room will be on the left set to false")]
-    //private bool enterRoomOnRight;
+    [SerializeField][Tooltip("Set to true if you want to enter a room which is on the right, if the room will be on the left set to false")]
+    private bool enterRoomOnRight;
    // [SerializeField][Tooltip("Enter initial index only when you want to enter room on the left")]
    // private int initialWaypointIndex=0;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(!isInteractable && collision.gameObject.tag == "Player")
         {
-            
+            if (enterRoomOnRight && Input.GetAxis("Horizontal")>0 || !enterRoomOnRight && Input.GetAxis("Horizontal")<0)
             ChangeScene(sceneToGo);
         }
     }

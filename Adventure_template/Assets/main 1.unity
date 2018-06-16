@@ -333,8 +333,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isFocus: 0
-  isInteractable: 1
+  isInteractable: 0
   sceneToGo: main
+  enterRoomOnRight: 0
 --- !u!1001 &571248554
 Prefab:
   m_ObjectHideFlags: 0
