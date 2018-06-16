@@ -1,0 +1,52 @@
+[
+	{
+		"title": "FirstDialogue",
+		"tags": "",
+		"body": "<<if $visited is false>>\n<<set $visited to true>>\nDo you love me?\n\n[[Errr... What?|NOOO]]\n[[I guess... I dunno|YAAAAAAS]]\n<<elseif $love is true>>\nMan, you rock!\n<<elseif $love is false>>\n:C\n<<endif>>",
+		"position": {
+			"x": 383,
+			"y": 28
+		},
+		"colorID": 0
+	},
+	{
+		"title": "NOOO",
+		"tags": "",
+		"body": "Oh, that's okay.\n<<set $love to false>>",
+		"position": {
+			"x": 203,
+			"y": 338
+		},
+		"colorID": 0
+	},
+	{
+		"title": "YAAAAAAS",
+		"tags": "",
+		"body": "Yee, I knew it!\n<<set $love to true>>\nHow Much?\n[[I dunno... A little|Little]]\n[[A LOT! You're my favourite BABY-MAN!|Alot]]",
+		"position": {
+			"x": 588,
+			"y": 279
+		},
+		"colorID": 0
+	},
+	{
+		"title": "Alot",
+		"tags": "",
+		"body": "Heeeeeee Haaaaaa\nNow give me a little smooch.",
+		"position": {
+			"x": 645,
+			"y": 490
+		},
+		"colorID": 0
+	},
+	{
+		"title": "Little",
+		"tags": "",
+		"body": "Well that's unfortunate.\nI tought that we're gonna have some sexy time.\nNow I rather have some french-fries.",
+		"position": {
+			"x": 411,
+			"y": 402
+		},
+		"colorID": 0
+	}
+]

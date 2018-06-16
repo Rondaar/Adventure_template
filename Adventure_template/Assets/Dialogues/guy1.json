@@ -1,0 +1,42 @@
+[
+	{
+		"title": "FirstDialogue",
+		"tags": "",
+		"body": "<<if $visited is false>>\n<<set $visited to true>>\nHi!\nI'm testing this awesome YarnSpinner plugin!\nIt's awesome, isn't it?\n\n[[Yea, it's pretty cool!|Yes]]\n[[I think it's lame...|No]]\n<<elseif $actionItem is true and $givenItem is false>>\nWow thanks a lot!\n<<set $givenItem to true>>\n<<elseif $actionItem is false and $givenItem is false>>\nHave you found it yet?\n<<endif>>",
+		"position": {
+			"x": 396,
+			"y": 63
+		},
+		"colorID": 0
+	},
+	{
+		"title": "Yes",
+		"tags": "",
+		"body": "I knew that you'd like it!\n[[|tutorial]]",
+		"position": {
+			"x": 147,
+			"y": 251
+		},
+		"colorID": 0
+	},
+	{
+		"title": "No",
+		"tags": "",
+		"body": "Well I'm sure that eventually you'll come around.\n[[|tutorial]]\n",
+		"position": {
+			"x": 613,
+			"y": 363
+		},
+		"colorID": 0
+	},
+	{
+		"title": "tutorial",
+		"tags": "",
+		"body": "Now, can you bring me a heart from a room on the right?\nI really like it.\nThe heart I mean...\nWhen you'll stand near it press \"E\".\nAnd please, don't speak to the other guy.\nHe's a big jerk...",
+		"position": {
+			"x": 399,
+			"y": 492
+		},
+		"colorID": 0
+	}
+]

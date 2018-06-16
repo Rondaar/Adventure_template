@@ -1,0 +1,62 @@
+[
+	{
+		"title": "FirstDialogue",
+		"tags": "",
+		"body": "<<if $visited is false>>\n<<set $visited to true>>\nHi!\nI'm testing this awesome YarnSpinner plugin!\nIt's awesome, isn't it?\n\n[[Yea, it's pretty cool!|Yes]]\n[[I think it's lame...|No]]\n<<elseif $actionItem is true and $givenItem is false>>\nWow you found it!\nCan I have it please?\n[[Yup, it's yours|yup]]\n[[I have to think about it|nope]]\n\n<<elseif $actionItem is false and $givenItem is false>>\nHave you found it yet?\nIf yes, than open your inventory with \"I\"...\nThan click on an item you want to use...\nAnd finally try to talk with me again.\nAlso if you want to put your item back in the inventory, just press \"R\".\n\n<<elseif $givenItem is true>>\nYou rock!\n<<endif>>",
+		"position": {
+			"x": 341,
+			"y": -50
+		},
+		"colorID": 0
+	},
+	{
+		"title": "Yes",
+		"tags": "",
+		"body": "I knew that you'd like it!\n[[Yup|tutorial]]",
+		"position": {
+			"x": 147,
+			"y": 251
+		},
+		"colorID": 0
+	},
+	{
+		"title": "No",
+		"tags": "",
+		"body": "Well I'm sure that eventually you'll come around.\n[[...|tutorial]]\n",
+		"position": {
+			"x": 642,
+			"y": 257
+		},
+		"colorID": 0
+	},
+	{
+		"title": "tutorial",
+		"tags": "",
+		"body": "Now, can you bring me a heart from a room on the right?\nI really like it.\nThe heart I mean...\nWhen you'll stand near it press \"E\".\nAnd please, don't speak to the other guy.\nHe's a big jerk...",
+		"position": {
+			"x": 399,
+			"y": 492
+		},
+		"colorID": 0
+	},
+	{
+		"title": "yup",
+		"tags": "",
+		"body": "<<removeItemYarn GM 3>>\nThanks duuuuude!\nYou're awesome!\n<<set $givenItem to true>>",
+		"position": {
+			"x": -157,
+			"y": 125
+		},
+		"colorID": 0
+	},
+	{
+		"title": "nope",
+		"tags": "",
+		"body": "I'll be here if you'll make up your mind",
+		"position": {
+			"x": 659,
+			"y": 61
+		},
+		"colorID": 0
+	}
+]
