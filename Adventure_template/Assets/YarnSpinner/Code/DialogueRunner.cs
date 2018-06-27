@@ -104,12 +104,13 @@ namespace Yarn.Unity
                 return;
             }
 
-            /* // And that we have our variable storage object
-             if (variableStorage == null) {
+            variableStorage = FindObjectOfType<VariableStorageBehaviour>();
+            // And that we have our variable storage object
+            if (variableStorage == null) {
                  Debug.LogError ("Variable storage was not set! Can't run the dialogue!");
                  return;
-             }*/
-            variableStorage = FindObjectOfType<VariableStorageBehaviour>();
+            }
+            
 
             // Ensure that the variable storage has the right stuff in it
             variableStorage.ResetToDefaults ();

@@ -148,6 +148,7 @@ namespace Yarn.Unity.Example
             {
                 optionButtons[i].gameObject.SetActive(true);
                 optionButtons[i].GetComponentInChildren<TextMesh>().text = optionString;
+               
                 i++;
             }
 

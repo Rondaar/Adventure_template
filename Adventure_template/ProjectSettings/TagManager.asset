@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - GM
+  - Tought
   layers:
   - Default
   - TransparentFX
@@ -44,4 +45,10 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 3141552285
+    locked: 0
+  - name: UI_Back
+    uniqueID: 1421092457
+    locked: 0
+  - name: UI
+    uniqueID: 855527953
     locked: 0

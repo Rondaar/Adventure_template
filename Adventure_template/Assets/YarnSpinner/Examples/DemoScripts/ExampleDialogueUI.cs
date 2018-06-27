@@ -75,8 +75,8 @@ namespace Yarn.Unity.Example {
             // Start by hiding the container, line and option buttons
             if (dialogueContainer != null)
                 dialogueContainer.SetActive(false);
-            if (lineText!=null)
-                lineText.gameObject.SetActive (false);
+          //  if (lineText!=null)
+               // lineText.gameObject.SetActive (false);
 
             foreach (var button in optionButtons) {
                 if (button!=null)
@@ -88,23 +88,47 @@ namespace Yarn.Unity.Example {
                 continuePrompt.SetActive (false);
         }
 
+        //trying to modify the code below to handle finding correct speaker and attaching speak bubble to him
         /// Show a line of dialogue, gradually
         public override IEnumerator RunLine (Yarn.Line line)
         {
             // Show the text
-            lineText.gameObject.SetActive (true);
-
+           // lineText.gameObject.SetActive (true);
+            
+            bool isDisplayText = false;
             if (textSpeed > 0.0f) {
                 // Display the line one character at a time
-                var stringBuilder = new StringBuilder ();
+                var stringBuilder = new StringBuilder();
+                StringBuilder nameBuilder = new StringBuilder();
 
                 foreach (char c in line.text) {
-                    stringBuilder.Append (c);
-                    lineText.text = stringBuilder.ToString ();
-                    yield return new WaitForSeconds (textSpeed);
+                    
+                    
+                    
+                    if (isDisplayText)
+                    {
+                        stringBuilder.Append(c);
+                        lineText.text = stringBuilder.ToString();
+                        yield return new WaitForSeconds(textSpeed);
+                    }
+                    else
+                    {
+                        if (c == ':')
+                        {
+                            //attach speak bubble to object with that name
+
+                            
+                            AttachSpeakBubble(nameBuilder.ToString());
+                            isDisplayText = true;
+                            continue;
+                        }
+                        nameBuilder.Append(c);
+                    }
+                   
                 }
             } else {
                 // Display the line immediately if textSpeed == 0
+                //TODO: Handle speach bubble attaching
                 lineText.text = line.text;
             }
 
@@ -118,13 +142,34 @@ namespace Yarn.Unity.Example {
             }
 
             // Hide the text and prompt
-            lineText.gameObject.SetActive (false);
-
+            // lineText.gameObject.SetActive (false);
+            lineText.text = "";
             if (continuePrompt != null)
                 continuePrompt.SetActive (false);
 
         }
 
+        private void AttachSpeakBubble(string speakerName)
+        {
+            GameObject speaker = GameObject.Find(speakerName);
+            if (speaker == null)
+            {
+                Debug.LogError("Couldn't find speaker with name: " + speakerName);
+            }
+            else
+            {
+                if (lineText != null)
+                {
+                    lineText.text = "";
+                }
+                lineText = speaker.GetComponentInChildren<Text>();
+
+                if (lineText == null)
+                {
+                    Debug.LogError("Couldn't find text component of: " +speaker.name);
+                }
+            }
+        }
         /// Show a list of options, and wait for the player to make a selection.
         public override IEnumerator RunOptions (Yarn.Options optionsCollection, 
                                                 Yarn.OptionChooser optionChooser)
@@ -140,9 +185,11 @@ namespace Yarn.Unity.Example {
             foreach (var optionString in optionsCollection.options) {
                 optionButtons [i].gameObject.SetActive (true);
                 optionButtons [i].GetComponentInChildren<Text> ().text = optionString;
+                //change particle system text
+                optionButtons[i].GetComponentInChildren<ToughtParticleSystem>().myText.text = optionString;
                 i++;
             }
-
+            FindObjectOfType<ToughtsAlign>().AlignToughts();
             // Record that we're using it
             SetSelectedOption = optionChooser;
 

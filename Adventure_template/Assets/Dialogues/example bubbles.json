@@ -1,0 +1,42 @@
+[
+	{
+		"title": "Start",
+		"tags": "",
+		"body": "Bobby:Hi stranger\n[[Love|Love]]\n[[Anger|Anger]]\n[[Curiosity|Curiosity]]",
+		"position": {
+			"x": 432,
+			"y": 60
+		},
+		"colorID": 0
+	},
+	{
+		"title": "Anger",
+		"tags": "",
+		"body": "Player:Grrr...\nBobby::C",
+		"position": {
+			"x": 728,
+			"y": 356
+		},
+		"colorID": 0
+	},
+	{
+		"title": "Love",
+		"tags": "",
+		"body": "Player:Love ya\nBobby:C:",
+		"position": {
+			"x": 187,
+			"y": 395
+		},
+		"colorID": 0
+	},
+	{
+		"title": "Curiosity",
+		"tags": "",
+		"body": "Player:Who?... What?\nBobby:Huh?",
+		"position": {
+			"x": 469,
+			"y": 409
+		},
+		"colorID": 0
+	}
+]
