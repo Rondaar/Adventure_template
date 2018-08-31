@@ -9,7 +9,7 @@ public class Exit : Interactable {
    // [Header("New Scene")]
     [SerializeField]
     private string sceneToGo;
-    [SerializeField][Tooltip("Set to true if you want to enter a room which is on the right, if the room will be on the left set to false")]
+    [SerializeField][Tooltip("Set to true if you want to enter a room which is on the right, if the room will be on the left set to false. If is interactable it dosen't matter.")]
     private bool enterRoomOnRight;
    // [SerializeField][Tooltip("Enter initial index only when you want to enter room on the left")]
    // private int initialWaypointIndex=0;

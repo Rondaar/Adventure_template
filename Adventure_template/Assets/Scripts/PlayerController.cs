@@ -30,46 +30,21 @@ public class PlayerController : MonoBehaviour {
     public bool canUseInventory=true;
     public bool performingAction = false;
 
-   // [HideInInspector]
     public Equipment actionItem;
-
     private Inventory inventory;
-    private HandleAnimation handleAnim;
-    //private bool holdingObject = false;
-    /*
-    #region OnSceneLoaded
-    void OnEnable()
-    {
-        //Tell our 'OnLevelFinishedLoading' function to start listening for a scene change as soon as this script is enabled.
-        SceneManager.sceneLoaded += OnLevelFinishedLoading;
-    }
 
-    void OnDisable()
-    {
-        //Tell our 'OnLevelFinishedLoading' function to stop listening for a scene change as soon as this script is disabled. Remember to always have an unsubscription for every delegate you subscribe to!
-        SceneManager.sceneLoaded -= OnLevelFinishedLoading;
-    }
+    private Rigidbody2D myRb;
+    private Animator myAnim;
 
-    void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
-    {
-        leftWaypointIndex = GameManager.instance.leftWaypointIndex;
-        rightWaypointIndex = GameManager.instance.rightWaypointIndex;
-        transform.position = waypoints[GameManager.instance.initialWaypointIndex].position;
-        leftWaypoint = waypoints[leftWaypointIndex];
-        rightWaypoint = waypoints[rightWaypointIndex];
-    }
-    #endregion
-    */
     private void Start()
     {
         inventory = GetComponentInChildren<Inventory>();
-        handleAnim = GetComponentInChildren<HandleAnimation>();
+        myRb = GetComponent<Rigidbody2D>();
+        myAnim = GetComponent<Animator>();
         InitializeWaypoints();
     }
     public void InitializeWaypoints()
     {
-        Debug.Log("left waypoint: " + leftWaypointIndex);
-        Debug.Log("right waypoint: " + rightWaypointIndex);
         leftWaypoint = waypoints[leftWaypointIndex];
         rightWaypoint = waypoints[rightWaypointIndex];
     }
@@ -103,73 +78,92 @@ public class PlayerController : MonoBehaviour {
         }
         
     }
-    
+
+    float move;
+
     void FixedUpdate () {
+        move = Input.GetAxis("Horizontal");
         if (!performingAction)
         {
             Move();
+            
         }
-	}
+        else
+        {
+            myRb.velocity = Vector2.zero;
+            move = 0;
+        }
+
+        myAnim.SetFloat("hsp", Mathf.Abs(move));
+    }
+
     private void Move()
     {
         
-        if (Input.GetAxis("Horizontal") > 0)
+        float finalSpeed = Mathf.Abs(move) * moveSpeed;
+        Vector2 dir;
+        if (move > 0)
         {
-            handleAnim.PlayAnimation("Walk", .1f, -1);
-            MoveRight();
-            //set new waypoints
-            if (transform.position == rightWaypoint.position && rightWaypointIndex < waypoints.Length - 1)
+            dir = (rightWaypoint.position - transform.position).normalized;
+            if (!facingRight)
             {
-                SetWaypointsRight();
-                if (!rightWaypoint.gameObject.activeSelf)
-                {
-                    SetWaypointsLeft();
-                }
-
+                Flip();
             }
-        }
-        else if (Input.GetAxis("Horizontal") < 0)
-        {
-            handleAnim.PlayAnimation("Walk", .1f, -1);
-            MoveLeft();
-            //set new waypoints
-            if (transform.position == leftWaypoint.position && leftWaypointIndex > 0)
+            //check waypoints
+            if (Vector2.Distance(transform.position, rightWaypoint.position) < .1f )
             {
-                SetWaypointsLeft();
-                if (!leftWaypoint.gameObject.activeSelf)
+                if (rightWaypointIndex < waypoints.Length - 1)
                 {
                     SetWaypointsRight();
+                    if (!rightWaypoint.gameObject.activeSelf)
+                    {
+                        SetWaypointsLeft();
+                    }
+                }
+                else
+                {
+                    finalSpeed = 0;
+                }
+            }
+        }
+        else if (move < 0)
+        {
+            dir = (leftWaypoint.position - transform.position).normalized;
+            if (facingRight)
+            {
+                Flip();
+            }
+            //check waypoints
+            if (Vector2.Distance(transform.position, leftWaypoint.position) < .1f)
+            {
+                if (leftWaypointIndex > 0)
+                {
+                    SetWaypointsLeft();
+                    if (!leftWaypoint.gameObject.activeSelf)
+                    {
+                        SetWaypointsRight();
+                    }
+                }
+                else
+                {
+                    finalSpeed = 0;
                 }
             }
         }
         else
         {
-            handleAnim.PlayAnimation("Idle", .1f, -1);
+            dir = Vector2.zero;
         }
-    }
-    private void MoveLeft()
-    {
-        transform.position = Vector2.MoveTowards(transform.position, leftWaypoint.position, Time.deltaTime * moveSpeed * runMultiplayer);
-        if (facingRight)
-        {
-            Flip();
-        }
-    }
-    private void MoveRight()
-    {
-        transform.position = Vector2.MoveTowards(transform.position, rightWaypoint.position, Time.deltaTime * moveSpeed * runMultiplayer);
-        if (!facingRight)
-        {
-            Flip();
-        }
+        myRb.velocity = dir * finalSpeed;
+
+       
+
     }
 
     private void Flip()
     {
         facingRight = !facingRight;
-        handleAnim.Flip();
-
-        //handle flipping
+        transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
     }
 
     private void SetWaypointsLeft()
@@ -217,9 +211,6 @@ public class PlayerController : MonoBehaviour {
             performingAction = false;
             canUseInventory = true;
         }
-        handleAnim.PlayAnimation("Idle", 2f, -1);
-
-
     }
 
     

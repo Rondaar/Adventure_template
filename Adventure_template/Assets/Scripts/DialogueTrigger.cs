@@ -6,9 +6,14 @@ using UnityEngine.UI;
 
 public class DialogueTrigger : Interactable {
 
-    [SerializeField]
+    
     private Text textField;
     public string dialogueName;
+
+    private void Awake()
+    {
+        textField = GetComponentInChildren<Text>();
+    }
     public override void Interact()
     {
         base.Interact();
