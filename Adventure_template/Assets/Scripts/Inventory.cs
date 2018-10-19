@@ -4,6 +4,7 @@ using UnityEngine;
 
 
 public class Inventory : MonoBehaviour {
+
     #region Singleton
     public static Inventory instance;
     private void Awake()
@@ -19,17 +20,15 @@ public class Inventory : MonoBehaviour {
     }
     #endregion
 
-    
-    
     public List<Item> items = new List<Item>();
 
     [SerializeField]
-    private float range = 2f;
+    float range = 2f;
     [SerializeField]
-    private float rotationSpeed = 1;
+    float rotationSpeed = 1;
     
     public List<GameObject> itemPrefabs = new List<GameObject>();
-    private bool isOpen = false;
+    bool isOpen = false;
     // Use this for initialization
     
 

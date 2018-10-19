@@ -5,50 +5,69 @@ using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour {
 
-
-
+    //fields
     [SerializeField]
-    private float moveSpeed = 1f;
+    float moveSpeed = 1f;
     [SerializeField]
-    private float runMultiplayer = 1f; //may implement running
+    float runMultiplayer = 1f; //may implement running
     [SerializeField]
-    private bool facingRight;
+    bool facingRight;
+    [SerializeField]
+    GameObject focus;
 
     [Header("Waypoints")]
-    
     public Transform[] waypoints;
-    
     public int leftWaypointIndex;
-    
     public int rightWaypointIndex;
-    private Transform leftWaypoint;
-    private Transform rightWaypoint;
 
-    [SerializeField]
-    private GameObject focus;
-
+    Transform leftWaypoint;
+    Transform rightWaypoint;
     public bool canUseInventory=true;
     public bool performingAction = false;
-
     public Equipment actionItem;
-    private Inventory inventory;
+    Inventory inventory;
+    Rigidbody2D myRb;
+    Animator myAnim;
+    float move;
 
-    private Rigidbody2D myRb;
-    private Animator myAnim;
+    //properties
+    public GameObject Focus 
+    {
+        get 
+        {
+            return focus; 
+        }
+        set 
+        {
+            if (focus == null)
+            {
+                focus = value;
+                value.GetComponent<Interactable>().IsFocus = true;
+            }
+            else if (value ==null)
+            {
+                focus = null;
+            }
+        } 
+    }
 
-    private void Start()
+
+    //methods
+    void Start()
     {
         inventory = GetComponentInChildren<Inventory>();
         myRb = GetComponent<Rigidbody2D>();
         myAnim = GetComponent<Animator>();
         InitializeWaypoints();
     }
+
     public void InitializeWaypoints()
     {
         leftWaypoint = waypoints[leftWaypointIndex];
         rightWaypoint = waypoints[rightWaypointIndex];
     }
-    private void Update()
+
+    void Update()
     {
         if (!performingAction)
         {
@@ -57,16 +76,17 @@ public class PlayerController : MonoBehaviour {
                 focus.GetComponent<Interactable>().Interact();
                 inventory.CloseInventory();
             }
+
             if (Input.GetKeyDown(KeyCode.I) && canUseInventory)
             {
                 inventory.InventoryTrigger();
             }
+
             if (actionItem != null)
             {
                 if (Input.GetButtonDown("UseItem"))
                 {
                     actionItem.Action();
-
                 }
                 if (Input.GetKeyDown(KeyCode.R))
                 {
@@ -74,12 +94,11 @@ public class PlayerController : MonoBehaviour {
                     inventory.CloseInventory();
                     actionItem = null;
                 }
-            }
-        }
-        
+            }//if (actionItem != null)
+        }//if (!performingAction)
+
     }
 
-    float move;
 
     void FixedUpdate () {
         move = Input.GetAxis("Horizontal");
@@ -97,7 +116,7 @@ public class PlayerController : MonoBehaviour {
         myAnim.SetFloat("hsp", Mathf.Abs(move));
     }
 
-    private void Move()
+    void Move()
     {
         
         float finalSpeed = Mathf.Abs(move) * moveSpeed;
@@ -160,40 +179,25 @@ public class PlayerController : MonoBehaviour {
 
     }
 
-    private void Flip()
+    void Flip()
     {
         facingRight = !facingRight;
         transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
     }
 
-    private void SetWaypointsLeft()
+    void SetWaypointsLeft()
     {
         rightWaypointIndex = leftWaypointIndex;
         leftWaypointIndex--;
         leftWaypoint = waypoints[leftWaypointIndex];
         rightWaypoint = waypoints[rightWaypointIndex];
     }
-    private void SetWaypointsRight()
+    void SetWaypointsRight()
     {
         leftWaypointIndex = rightWaypointIndex;
         rightWaypointIndex++;
         leftWaypoint = waypoints[leftWaypointIndex];
         rightWaypoint = waypoints[rightWaypointIndex];
-    }
-    public void SetFocus(GameObject newFocus)
-    {
-        if (focus == null)
-        {
-            focus = newFocus;
-            newFocus.GetComponent<Interactable>().IsFocus = true;
-        }
-        else
-        {
-            if (newFocus == null)
-            {
-                focus = null;
-            }
-        }
     }
 
     public void SetPerformingAction(bool b)
