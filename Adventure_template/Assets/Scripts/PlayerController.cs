@@ -185,7 +185,7 @@ public class PlayerController : MonoBehaviour {
         if (focus == null)
         {
             focus = newFocus;
-            newFocus.GetComponent<Interactable>().isFocus = true;
+            newFocus.GetComponent<Interactable>().IsFocus = true;
         }
         else
         {
