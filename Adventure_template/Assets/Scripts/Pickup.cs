@@ -5,24 +5,23 @@ using UnityEngine;
 public class Pickup : Interactable {
 
     [SerializeField]
-    private Item myItem;
-    private Inventory inventory;
-    void Start()
+    GameObject myItemForInventory;
+    Inventory inventory;
+
+    protected override void Start()
     {
+        base.Start();
         inventory = Inventory.instance;    
     }
+
     public override void Interact()
     {
         PickUpItem();
-        
     }
 
     public void PickUpItem()
     {
-
-        inventory.AddItem(myItem);
-        // Destroy(gameObject);
-        gameObject.SetActive(false);
-        
+        inventory.AddItem(myItemForInventory);
+        Destroy(gameObject);
     }
 }

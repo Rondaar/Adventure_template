@@ -20,24 +20,14 @@ public class Inventory : MonoBehaviour {
     }
     #endregion
 
-    public List<Item> items = new List<Item>();
-
+    //fields
     [SerializeField]
     float range = 2f;
-    [SerializeField]
-    float rotationSpeed = 1;
-    
-    public List<GameObject> itemPrefabs = new List<GameObject>();
+    List<GameObject> itemPrefabs = new List<GameObject>();
     bool isOpen = false;
-    // Use this for initialization
-    
 
 
-    void FixedUpdate()
-    {
-        transform.Rotate(Vector3.forward, Time.deltaTime * rotationSpeed);
-
-    }
+    //methods
     public void InventoryTrigger()
     {
         if (isOpen)
@@ -49,6 +39,8 @@ public class Inventory : MonoBehaviour {
             OpenInventory();
         }
     }
+
+
     public void CloseInventory()
     {
         if (isOpen)
@@ -56,57 +48,45 @@ public class Inventory : MonoBehaviour {
             GetComponentInParent<PlayerController>().canUseInventory = false;
             foreach (GameObject item in itemPrefabs)
             {
-
-                //newItem.transform.position = Vector2.zero;
-
                 item.GetComponent<ItemInInventory>().HideItem();
-
             }
-
-
             isOpen = false;
         }
     }
     private void OpenInventory()
     {
-        if (items.Count > 0)
+        if (itemPrefabs.Count > 0)
         {
-            float angleChange = 360 / items.Count;
+            float angleChange = 360 / itemPrefabs.Count;
             float currAngle = 0;
             foreach (GameObject item in itemPrefabs)
             {
                 item.SetActive(true);
-                item.GetComponent<ItemInInventory>().myPosition = Quaternion.Euler(0, 0, currAngle) * Vector2.up * range;
+                item.GetComponent<ItemInInventory>().MyPosition = Quaternion.Euler(0, 0, currAngle) * Vector2.up * range;
                 item.GetComponent<ItemInInventory>().ShowItem();
                 currAngle += angleChange;
-
             }
             isOpen = true;
         }
-
     }
 
-    public void AddItem(Item item)
+    public void AddItem(GameObject item)
     {
-        items.Add(item);
-       
-        GameObject itemPrefab = Instantiate(item.prefab, transform);
-        itemPrefabs.Add(itemPrefab);
-        itemPrefab.GetComponent<ItemInInventory>().myItem = item;
-        itemPrefab.SetActive(false);
-
+        if (item.GetComponent<ItemInInventory>())
+        {
+            GameObject itemPrefab = Instantiate(item, transform);
+            itemPrefabs.Add(itemPrefab);
+            itemPrefab.SetActive(false);
+        }
+        else
+        {
+            Debug.Log("Item dosen't have ItemInInventory component");
+            Debug.Break();
+        }
     }
     public void RemoveItem(GameObject item)
     {
-        //need to fix this function
         itemPrefabs.Remove(item);
-        items.Remove(item.GetComponent<ItemInInventory>().myItem);
-       if (items.Count <2)
-        {
-            GetComponentInParent<PlayerController>().canUseInventory = true;
-        }
-
         Destroy(item);
-       
     }
 }

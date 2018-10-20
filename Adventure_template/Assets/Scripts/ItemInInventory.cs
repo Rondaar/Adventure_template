@@ -3,38 +3,33 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ItemInInventory : MonoBehaviour {
-    public Vector2 myPosition;
-    
-    public float speed = 3f;
+    [SerializeField]
+    Vector2 myPosition;
+    [SerializeField]
+    float speed = 3f;
+    Inventory inventory;
 
-    private Quaternion initialRotation;
+    public Vector2 MyPosition { get; set; }
 
-    public Item myItem;
-
-    private Inventory inventory;
-    private void Start()
+    void Start()
     {
-        initialRotation = transform.localRotation;
         inventory = GetComponentInParent<Inventory>();
     }
-    private void OnMouseDown()
+    void OnMouseDown()
     {
-        //Equip
         inventory.CloseInventory();
-        myItem.Use();
-        
-        inventory.RemoveItem(gameObject);
-        //Inventory.instance.GetComponentInParent<PlayerController>().SetCurrentItem()
-    }
-    private void LateUpdate()
-    {
-        //remain stable rotation
-        transform.rotation = initialRotation;
+        Use();
     }
     
-    private IEnumerator MoveTowardsPosition(Vector2 position, bool destroy)
+    void Use()
     {
-        
+        Debug.Log("using " + gameObject.name);
+        //inventory.RemoveItem(gameObject); to jeśli chcemy usunąć obiekt z inventory
+    }
+
+    
+    IEnumerator MoveTowardsPosition(Vector2 position, bool destroy)
+    {  
         while (true)
         {
             if (Vector2.Distance(transform.localPosition, position)>.2f)
@@ -50,21 +45,17 @@ public class ItemInInventory : MonoBehaviour {
                 //TODO: use pooler
                 if (destroy)
                 {
-                    
                     GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().canUseInventory = true;
                     gameObject.SetActive(false);
                 }
                 yield break;
             }
-        }
-        
+        }   
     }
     public void ShowItem()
     {
         StopAllCoroutines();
-        StartCoroutine(MoveTowardsPosition(myPosition,false));
-       
-        
+        StartCoroutine(MoveTowardsPosition(myPosition,false));   
     }
     public void HideItem()
     {

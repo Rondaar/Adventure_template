@@ -90,7 +90,7 @@ public class PlayerController : MonoBehaviour {
                 }
                 if (Input.GetKeyDown(KeyCode.R))
                 {
-                    EquipmentManager.instance.Remove((int)actionItem.equipmentSlot);
+                    //EquipmentManager.instance.Remove((int)actionItem.equipmentSlot);
                     inventory.CloseInventory();
                     actionItem = null;
                 }

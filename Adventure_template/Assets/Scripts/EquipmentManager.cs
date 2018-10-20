@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class EquipmentManager : MonoBehaviour {
-
+    /*
     #region Singleton
     public static EquipmentManager instance;
 
@@ -124,5 +124,5 @@ public class EquipmentManager : MonoBehaviour {
             vStorage.SetValue("$actionItem", new Yarn.Value(false));
             Destroy(hand.GetChild(0).gameObject);
         }
-    }
+    }*/
 }

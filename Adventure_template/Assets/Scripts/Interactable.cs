@@ -12,7 +12,15 @@ public class Interactable : MonoBehaviour
 
 
     //methods
-    protected void OnTriggerStay2D(Collider2D collider)
+    protected virtual void Start()
+    {
+        if (!GetComponent<Collider2D>())
+        {
+            Debug.Log("Need to apply trigger collider to interactable gameobject");
+        }   
+    }
+
+    void OnTriggerStay2D(Collider2D collider)
     {
         if (collider.gameObject.tag == "Player")
         {
@@ -21,7 +29,9 @@ public class Interactable : MonoBehaviour
         }
         
     }
-    protected void OnTriggerExit2D(Collider2D collider)
+
+
+    void OnTriggerExit2D(Collider2D collider)
     {
         if (collider.gameObject.tag == "Player" && isFocus == true)
         {
@@ -29,6 +39,7 @@ public class Interactable : MonoBehaviour
             isFocus = false;
         }
     }
+
 
     public virtual void Interact()
     {

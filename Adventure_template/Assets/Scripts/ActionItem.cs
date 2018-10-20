@@ -8,6 +8,6 @@ public class ActionItem : Equipment {
     public override void Use()
     {
         base.Use();
-        EquipmentManager.instance.Equip(this);
+       // EquipmentManager.instance.Equip(this);
     }
 }
