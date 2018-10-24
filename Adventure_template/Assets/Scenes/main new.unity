@@ -25343,7 +25343,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   range: 2
-  itemPrefabs: []
 --- !u!4 &1573730277 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4806583825137936, guid: 02debcbf48499b14495989d055b7b49c,
@@ -26856,6 +26855,17 @@ MonoBehaviour:
   canUseInventory: 1
   performingAction: 0
   actionItem: {fileID: 0}
+--- !u!114 &2125533666
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2125533662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c9a134966c3b3043863850f468df2db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &2125533667 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4353358756110390, guid: 02debcbf48499b14495989d055b7b49c,
