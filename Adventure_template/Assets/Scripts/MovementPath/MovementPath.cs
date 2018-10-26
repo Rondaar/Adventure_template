@@ -13,7 +13,7 @@ public class MovementPath
     [SerializeField, HideInInspector]
     bool autoSetControlPoints;
 
-    public Path(Vector2 centre)
+    public MovementPath(Vector2 centre)
     {
         points = new List<Vector2>
         {
