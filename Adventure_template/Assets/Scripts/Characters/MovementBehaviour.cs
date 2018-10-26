@@ -16,12 +16,10 @@ public class MovementBehaviour : MonoBehaviour {
     Vector2[] waypoints;
     int currWaypointIndex = 0;
 
-    Rigidbody2D myRb;
     InputBehaviour input;
 
     private void Start()
     {
-        myRb = GetComponent<Rigidbody2D>();
         input = GetComponent<InputBehaviour>();
         waypoints = pathCreator.path.CalculateEvenlySpacedPoints(spacing, resolution);
         foreach (Vector2 p in waypoints)
