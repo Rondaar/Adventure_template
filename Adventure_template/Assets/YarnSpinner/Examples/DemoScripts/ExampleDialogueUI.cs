@@ -246,7 +246,7 @@ namespace Yarn.Unity.Example {
         public override IEnumerator DialogueComplete ()
         {
             Debug.Log ("Complete!");
-            FindObjectOfType<PlayerController>().SetPerformingAction(false);
+            FindObjectOfType<InteractionControllerBehaviour>().PerformingAction=false;
             // Hide the dialogue interface.
             if (dialogueContainer != null)
                 dialogueContainer.SetActive(false);

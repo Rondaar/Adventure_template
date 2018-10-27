@@ -24,7 +24,7 @@ public class Interactable : MonoBehaviour
     {
         if (collider.gameObject.tag == "Player")
         {
-            collider.gameObject.GetComponent<PlayerController>().Focus=gameObject;
+            collider.gameObject.GetComponent<InteractionControllerBehaviour>().Focus=gameObject;
             
         }
         

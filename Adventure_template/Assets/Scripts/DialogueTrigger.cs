@@ -18,7 +18,7 @@ public class DialogueTrigger : Interactable {
     {
         base.Interact();
         TriggerDialogue();
-        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().SetPerformingAction(true);
+        GameObject.FindGameObjectWithTag("Player").GetComponent<InteractionControllerBehaviour>().PerformingAction =true;
     }
     public void TriggerDialogue()
     {

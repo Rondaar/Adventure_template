@@ -45,7 +45,7 @@ public class Inventory : MonoBehaviour {
     {
         if (isOpen)
         {
-            GetComponentInParent<PlayerController>().canUseInventory = false;
+            //GetComponentInParent<PlayerController>().canUseInventory = false;
             foreach (GameObject item in itemPrefabs)
             {
                 item.GetComponent<ItemInInventory>().HideItem();

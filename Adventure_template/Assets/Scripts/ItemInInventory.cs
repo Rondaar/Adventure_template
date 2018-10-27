@@ -45,7 +45,7 @@ public class ItemInInventory : MonoBehaviour {
                 //TODO: use pooler
                 if (destroy)
                 {
-                    GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().canUseInventory = true;
+                    //GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().canUseInventory = true;
                     gameObject.SetActive(false);
                 }
                 yield break;
