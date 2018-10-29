@@ -6,7 +6,7 @@ public class AnimatedMovePosition : MonoBehaviour
 {
 
     [SerializeField]
-    float duration;
+    float duration = 1;
 
     [Space(10)]
     [Header("Scale")]
@@ -23,7 +23,7 @@ public class AnimatedMovePosition : MonoBehaviour
     Vector3 endPos;
     bool animCompleated = false;
 
-	void Start ()
+	void Awake ()
     {
         InitializeVariables();
     }
@@ -33,6 +33,8 @@ public class AnimatedMovePosition : MonoBehaviour
         startPos = Vector3.zero;
         startScale = Vector3.zero;
         endScale = transform.localScale;
+        Debug.Log(endScale);
+        Debug.Log(transform.localScale);
     }
 
     public void TriggerAnimation(Vector3 _endPos = default(Vector3))
@@ -40,11 +42,13 @@ public class AnimatedMovePosition : MonoBehaviour
         if (animCompleated)
         {
             StartCoroutine(MoveFromToPosition(endPos, startPos, endScale, startScale, duration));
+            animCompleated = false;
         }
         else
         {
             endPos = _endPos;
             StartCoroutine(MoveFromToPosition(startPos, endPos, startScale, endScale, duration));
+            animCompleated = true;
         }
     }
 

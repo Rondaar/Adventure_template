@@ -62,8 +62,8 @@ public class Inventory : MonoBehaviour {
             foreach (GameObject item in itemPrefabs)
             {
                 item.SetActive(true);
-                item.GetComponent<ItemInInventory>().MyPosition = Quaternion.Euler(0, 0, currAngle) * Vector2.up * range;
-                item.GetComponent<ItemInInventory>().ShowItem();
+                //item.GetComponent<ItemInInventory>().MyPosition = 
+                item.GetComponent<ItemInInventory>().ShowItem(Quaternion.Euler(0, 0, currAngle) * Vector2.up * range);
                 currAngle += angleChange;
             }
             isOpen = true;

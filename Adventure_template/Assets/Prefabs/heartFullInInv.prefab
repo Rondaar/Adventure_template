@@ -20,10 +20,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4406394484931236}
   - component: {fileID: 212898621979549852}
-  - component: {fileID: 114131423012078932}
   - component: {fileID: 114821544326811640}
   - component: {fileID: 58282823181838442}
   - component: {fileID: 50198847192979856}
+  - component: {fileID: 114475321056761870}
   m_Layer: 0
   m_Name: heartFullInInv
   m_TagString: Untagged
@@ -79,19 +79,102 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.16
---- !u!114 &114131423012078932
+--- !u!114 &114475321056761870
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1173066284983916}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 997f3fa1d516d6a44826626d1d086485, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b46ecee8a3ecd44eb0b37fbe07447f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myPosition: {x: 0, y: 0}
-  speed: 3
+  duration: 0.5
+  scaleCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.7387437
+      value: 1.066975
+      inSlope: 0.35347113
+      outSlope: 0.35347113
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.42892158
+    - serializedVersion: 3
+      time: 0.8999889
+      value: 0.96320397
+      inSlope: -0.35645315
+      outSlope: -0.35645315
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.50648427
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  posCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: -0.0014038086
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.6317469
+      value: 1.0908722
+      inSlope: 0.4875129
+      outSlope: 0.4875129
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.31437933
+    - serializedVersion: 3
+      time: 0.8091301
+      value: 0.9573454
+      inSlope: -0.32768428
+      outSlope: -0.32768428
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0.9985962
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &114821544326811640
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -103,8 +186,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d117458171c53724cac98c7d0bcaa432, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myPosition: {x: 0, y: 0}
-  speed: 3
   dialogueName: Start
 --- !u!212 &212898621979549852
 SpriteRenderer:
