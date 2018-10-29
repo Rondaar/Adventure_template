@@ -11,7 +11,7 @@ public class ItemInInventory : MonoBehaviour {
 
     public Vector2 MyPosition { get; set; }
 
-    void Start()
+    virtual protected void Start()
     {
         inventory = GetComponentInParent<Inventory>();
     }
@@ -19,14 +19,12 @@ public class ItemInInventory : MonoBehaviour {
     {  
         Use();
     }
-    
-    void Use()
+    virtual protected void Use()
     {
         inventory.CloseInventory();
         Debug.Log("using " + gameObject.name);
         //inventory.RemoveItem(gameObject); to jeśli chcemy usunąć obiekt z inventory
     }
-
     IEnumerator MoveTowardsPosition(Vector2 position, bool destroy)
     {  
         while (true)
