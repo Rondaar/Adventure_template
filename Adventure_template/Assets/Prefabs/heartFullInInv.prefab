@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4406394484931236}
   - component: {fileID: 212898621979549852}
   - component: {fileID: 114131423012078932}
+  - component: {fileID: 114821544326811640}
   - component: {fileID: 58282823181838442}
   - component: {fileID: 50198847192979856}
   m_Layer: 0
@@ -84,13 +85,27 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1173066284983916}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 997f3fa1d516d6a44826626d1d086485, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   myPosition: {x: 0, y: 0}
   speed: 3
+--- !u!114 &114821544326811640
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1173066284983916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d117458171c53724cac98c7d0bcaa432, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myPosition: {x: 0, y: 0}
+  speed: 3
+  dialogueName: Start
 --- !u!212 &212898621979549852
 SpriteRenderer:
   m_ObjectHideFlags: 1
