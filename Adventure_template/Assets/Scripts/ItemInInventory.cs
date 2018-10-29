@@ -16,18 +16,17 @@ public class ItemInInventory : MonoBehaviour {
         inventory = GetComponentInParent<Inventory>();
     }
     void OnMouseDown()
-    {
-        inventory.CloseInventory();
+    {  
         Use();
     }
     
     void Use()
     {
+        inventory.CloseInventory();
         Debug.Log("using " + gameObject.name);
         //inventory.RemoveItem(gameObject); to jeśli chcemy usunąć obiekt z inventory
     }
 
-    
     IEnumerator MoveTowardsPosition(Vector2 position, bool destroy)
     {  
         while (true)
