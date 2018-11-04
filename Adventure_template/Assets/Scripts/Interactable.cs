@@ -20,12 +20,11 @@ public class Interactable : MonoBehaviour
         }   
     }
 
-    void OnTriggerStay2D(Collider2D collider)
+    void OnTriggerEnter2D(Collider2D collider)
     {
         if (collider.gameObject.tag == "Player")
         {
             collider.gameObject.GetComponent<InteractionControllerBehaviour>().Focus=gameObject;
-            
         }
         
     }
@@ -33,10 +32,11 @@ public class Interactable : MonoBehaviour
 
     void OnTriggerExit2D(Collider2D collider)
     {
-        if (collider.gameObject.tag == "Player" && isFocus == true)
+        if (collider.gameObject.tag == "Player" )//&& isFocus == true)
         {
-            collider.gameObject.GetComponent<PlayerController>().Focus = null;
+            collider.gameObject.GetComponent<InteractionControllerBehaviour>().Focus = null;
             isFocus = false;
+            Debug.Log("fasle");
         }
     }
 

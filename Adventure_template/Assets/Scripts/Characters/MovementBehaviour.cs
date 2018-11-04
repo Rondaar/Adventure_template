@@ -22,18 +22,18 @@ public class MovementBehaviour : MonoBehaviour {
     {
         input = GetComponent<InputBehaviour>();
         waypoints = pathCreator.path.CalculateEvenlySpacedPoints(spacing, resolution);
-        foreach (Vector2 p in waypoints)
+       /* foreach (Vector2 p in waypoints)
         {
             GameObject g = GameObject.CreatePrimitive(PrimitiveType.Sphere);
             g.transform.position = p;
             g.transform.localScale = Vector3.one * spacing * .5f;
-        }
+        }*/
     }
 
     private void Update()
     {
         Vector2 target = SetTarget();
-        transform.position = Vector2.MoveTowards(transform.position, target, moveSpeed*Time.deltaTime);
+        transform.position = Vector2.MoveTowards(transform.position, target, moveSpeed*Mathf.Abs(input.Horizontal)*Time.deltaTime);
         CheckIfWaypointInRange();
     }
 
