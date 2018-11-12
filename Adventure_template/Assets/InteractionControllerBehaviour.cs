@@ -21,7 +21,7 @@ public class InteractionControllerBehaviour : MonoBehaviour {
             if (focus == null)
             {
                 focus = value;
-                value.GetComponent<Interactable>().IsFocus = true;
+                value.GetComponent<Interactable1>().IsFocus = true;
             }
             else if (value == null)
             {
@@ -54,7 +54,7 @@ public class InteractionControllerBehaviour : MonoBehaviour {
         {
             if ( input.ActionA && focus != null)
             {
-                focus.GetComponent<Interactable>().Interact();
+                focus.GetComponent<Interactable1>().Interact();
                 inventory.CloseInventory();
             }
 
