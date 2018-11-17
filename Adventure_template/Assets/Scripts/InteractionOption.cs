@@ -7,7 +7,7 @@ public abstract class InteractionOption : ScriptableObject{
     [SerializeField]
     private Sprite icon;
 
-    public Sprite Icon { get; }
+    public Sprite Icon { get { return icon; } private set { } }
 
     public abstract void Interact();
 }

@@ -3,14 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using Yarn.Unity;
 
-[CreateAssetMenu(fileName ="New Dialogue Interaction Option",menuName = "Interaction Option")]
-public abstract class InteractionOptionDialogue : InteractionOption
+[CreateAssetMenu(fileName ="New Dialogue Interaction Option",menuName = "Interaction Option Dialogue")]
+public class InteractionOptionDialogue : InteractionOption
 {
 
     [SerializeField]
     string nodeName;
-    [SerializeField]
-    string dialogueName;
 
 
     public override void Interact()
@@ -20,7 +18,7 @@ public abstract class InteractionOptionDialogue : InteractionOption
     }
     public void TriggerDialogue()
     {
-        FindObjectOfType<DialogueRunner>().StartDialogue(dialogueName); //maybe set reference OnEnable
+        FindObjectOfType<DialogueRunner>().StartDialogue(nodeName); //maybe set reference OnEnable
     }
 
 }

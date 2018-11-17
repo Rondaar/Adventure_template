@@ -7,10 +7,16 @@ public class Interactable1 : MonoBehaviour
     //fields
     [SerializeField]
     List<InteractionOption> options;
+    [SerializeField]
+    float range = 2f;
+    [SerializeField]
+    GameObject optionPrefab;
 
     bool isFocus = false;
+    bool isOpen = false;
     SpriteRenderer sprRndr;
     CircleCollider2D col;
+    List<GameObject> optionButtons;
     //properties
     public bool IsFocus { set; get; }
 
@@ -23,7 +29,8 @@ public class Interactable1 : MonoBehaviour
             Debug.Log("Need to apply trigger collider to interactable gameobject");
         }
         sprRndr.color = new Color(sprRndr.color.r, sprRndr.color.g, sprRndr.color.b, 0);
-        if (options.Count==1)
+        optionButtons = new List<GameObject>();
+        if (options.Count == 1)
         {
             sprRndr.sprite = options[0].Icon;
         }
@@ -32,6 +39,7 @@ public class Interactable1 : MonoBehaviour
     {
         sprRndr = GetComponent<SpriteRenderer>();
         col = GetComponent<CircleCollider2D>();
+       
     }
 
     void OnTriggerEnter2D(Collider2D collider)
@@ -59,7 +67,6 @@ public class Interactable1 : MonoBehaviour
         {
             collider.gameObject.GetComponent<InteractionControllerBehaviour>().Focus = null;
             isFocus = false;
-            Debug.Log("fasle");
             sprRndr.color = new Color(sprRndr.color.r, sprRndr.color.g, sprRndr.color.b, 0);
         }
     }
@@ -74,12 +81,74 @@ public class Interactable1 : MonoBehaviour
         }
         else
         {
+            DisplayOptionsTrigger();
+        }
+    }
+
+    public void DisplayOptionsTrigger()
+    {
+        if (isOpen)
+        {
+            HideOptions();
+        }
+        else
+        {
             DisplayOptions();
         }
     }
 
+
+    public void HideOptions()
+    {
+        if (isOpen)
+        {
+            //GetComponentInParent<PlayerController>().canUseInventory = false;
+            
+            while(optionButtons.Count!=0)
+            {
+                Destroy(optionButtons[0]);
+                optionButtons.RemoveAt(0);
+            }
+            isOpen = false;
+        }
+    }
     private void DisplayOptions()
     {
-
+        if (options.Count > 0)
+        {
+            float angleChange = 360 / options.Count;
+            float currAngle = 90;
+            foreach (InteractionOption option in options)
+            {
+                //item.SetActive(true);
+                GameObject currOptionButton = Instantiate(optionPrefab, transform);
+                //item.GetComponent<ItemInInventory>().MyPosition = 
+                currOptionButton.GetComponent<InteractionOptionButton>().ShowOption(Quaternion.Euler(0, 0, currAngle) * Vector2.up * range);
+                optionButtons.Add(currOptionButton);
+                currAngle += angleChange;
+            }
+            isOpen = true;
+        }
     }
+
+    /*
+    public void AddItem(GameObject item)
+    {
+        if (item.GetComponent<ItemInInventory>())
+        {
+            GameObject itemPrefab = Instantiate(item, transform);
+            itemPrefabs.Add(itemPrefab);
+            itemPrefab.SetActive(false);
+        }
+        else
+        {
+            Debug.Log("Item dosen't have ItemInInventory component");
+            Debug.Break();
+        }
+    }
+    public void RemoveItem(GameObject item)
+    {
+        itemPrefabs.Remove(item);
+        Destroy(item);
+    }*/
 }
