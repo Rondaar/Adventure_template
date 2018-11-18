@@ -12,13 +12,14 @@ public class Interactable1 : MonoBehaviour
     [SerializeField]
     GameObject optionPrefab;
 
+    float alpha;
     bool isFocus = false;
     bool isOpen = false;
     SpriteRenderer sprRndr;
     CircleCollider2D col;
     List<GameObject> optionButtons;
     //properties
-    public bool IsFocus { set; get; }
+    public bool IsFocus { set { isFocus = value; } get {return isFocus; } }
 
     
     //methods
@@ -38,10 +39,17 @@ public class Interactable1 : MonoBehaviour
     void Awake()
     {
         sprRndr = GetComponent<SpriteRenderer>();
-        col = GetComponent<CircleCollider2D>();
-       
+        col = GetComponent<CircleCollider2D>();    
     }
 
+    void Update()
+    {
+        if (!isFocus)
+        {
+            alpha = 0;
+        }
+        sprRndr.color = new Color(sprRndr.color.r, sprRndr.color.g, sprRndr.color.b, alpha);
+    }
     void OnTriggerEnter2D(Collider2D collider)
     {
         if (collider.gameObject.tag == "Player")
@@ -56,8 +64,10 @@ public class Interactable1 : MonoBehaviour
         if (collider.gameObject.tag == "Player")
         {
             collider.gameObject.GetComponent<InteractionControllerBehaviour>().Focus = gameObject;
-            float alpha = Mathf.Clamp01(1-Mathf.Abs(transform.position.x - collider.transform.position.x)/col.radius);
-            sprRndr.color = new Color(sprRndr.color.r, sprRndr.color.g, sprRndr.color.b, alpha);
+            if (!isOpen)
+            {
+                alpha = Mathf.Clamp01(1 - Mathf.Abs(transform.position.x - collider.transform.position.x) / col.radius);
+            }
         }
     }
 
@@ -68,6 +78,10 @@ public class Interactable1 : MonoBehaviour
             collider.gameObject.GetComponent<InteractionControllerBehaviour>().Focus = null;
             isFocus = false;
             sprRndr.color = new Color(sprRndr.color.r, sprRndr.color.g, sprRndr.color.b, 0);
+            if (isOpen)
+            {
+                HideOptions();
+            }
         }
     }
 
@@ -109,11 +123,14 @@ public class Interactable1 : MonoBehaviour
                 Destroy(optionButtons[0]);
                 optionButtons.RemoveAt(0);
             }
+            sprRndr.color = new Color(sprRndr.color.r, sprRndr.color.g, sprRndr.color.b, alpha);
             isOpen = false;
         }
+
     }
     private void DisplayOptions()
     {
+        alpha = 0;
         if (options.Count > 0)
         {
             float angleChange = 360 / options.Count;
@@ -124,6 +141,7 @@ public class Interactable1 : MonoBehaviour
                 GameObject currOptionButton = Instantiate(optionPrefab, transform);
                 //item.GetComponent<ItemInInventory>().MyPosition = 
                 currOptionButton.GetComponent<InteractionOptionButton>().ShowOption(Quaternion.Euler(0, 0, currAngle) * Vector2.up * range);
+                currOptionButton.GetComponent<InteractionOptionButton>().SetInteractionOption(option);
                 optionButtons.Add(currOptionButton);
                 currAngle += angleChange;
             }

@@ -22,6 +22,7 @@ public class InteractionOptionButton : MonoBehaviour {
     {
         interactableParent.HideOptions();
         Debug.Log("using " + gameObject.name);
+        myOption.Interact();
         //inventory.RemoveItem(gameObject); to jeśli chcemy usunąć obiekt z inventory
     }
 
@@ -40,11 +41,11 @@ public class InteractionOptionButton : MonoBehaviour {
         if (gameObject.activeSelf) myAnim.TriggerAnimation();
     }
 
-    public void SetInteractionOption(InteractionOption myOption)
+    public void SetInteractionOption(InteractionOption option)
     {
         //set sprite
         //set void
-        this.myOption = myOption;
+        myOption = option;
         GetComponent<SpriteRenderer>().sprite = myOption.Icon;
     }
 
