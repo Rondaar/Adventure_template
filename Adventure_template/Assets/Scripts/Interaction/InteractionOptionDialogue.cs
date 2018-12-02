@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Yarn.Unity;
 
-[CreateAssetMenu(fileName ="New Dialogue Interaction Option",menuName = "Interaction Option Dialogue")]
+[CreateAssetMenu(fileName ="New Dialogue Interaction Option",menuName = "Interaction Option/Dialogue")]
 public class InteractionOptionDialogue : InteractionOption
 {
 

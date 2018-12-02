@@ -2,17 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Interactable1 : MonoBehaviour
 {
     //fields
     [SerializeField]
     List<InteractionOption> options;
     [SerializeField]
-    float range = 2f;
+    float optionsRange = 2f;
     [SerializeField]
     GameObject optionPrefab;
 
     float alpha;
+    
     bool isFocus = false;
     bool isOpen = false;
     SpriteRenderer sprRndr;
@@ -39,7 +41,8 @@ public class Interactable1 : MonoBehaviour
     void Awake()
     {
         sprRndr = GetComponent<SpriteRenderer>();
-        col = GetComponent<CircleCollider2D>();    
+        col = GetComponent<CircleCollider2D>();
+        InterationOptionInit();
     }
 
     void Update()
@@ -140,7 +143,7 @@ public class Interactable1 : MonoBehaviour
                 //item.SetActive(true);
                 GameObject currOptionButton = Instantiate(optionPrefab, transform);
                 //item.GetComponent<ItemInInventory>().MyPosition = 
-                currOptionButton.GetComponent<InteractionOptionButton>().ShowOption(Quaternion.Euler(0, 0, currAngle) * Vector2.up * range);
+                currOptionButton.GetComponent<InteractionOptionButton>().ShowOption(Quaternion.Euler(0, 0, currAngle) * Vector2.up * optionsRange);
                 currOptionButton.GetComponent<InteractionOptionButton>().SetInteractionOption(option);
                 optionButtons.Add(currOptionButton);
                 currAngle += angleChange;
@@ -149,24 +152,11 @@ public class Interactable1 : MonoBehaviour
         }
     }
 
-    /*
-    public void AddItem(GameObject item)
+   void InterationOptionInit()
     {
-        if (item.GetComponent<ItemInInventory>())
+        foreach(InteractionOption option in options)
         {
-            GameObject itemPrefab = Instantiate(item, transform);
-            itemPrefabs.Add(itemPrefab);
-            itemPrefab.SetActive(false);
-        }
-        else
-        {
-            Debug.Log("Item dosen't have ItemInInventory component");
-            Debug.Break();
+            option.MyGO = gameObject;
         }
     }
-    public void RemoveItem(GameObject item)
-    {
-        itemPrefabs.Remove(item);
-        Destroy(item);
-    }*/
 }

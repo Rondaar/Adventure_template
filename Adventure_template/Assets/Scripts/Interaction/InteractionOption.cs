@@ -8,6 +8,7 @@ public abstract class InteractionOption : ScriptableObject{
     private Sprite icon;
 
     public Sprite Icon { get { return icon; } private set { } }
+    public GameObject MyGO { get; set; }
 
     public abstract void Interact();
 }
