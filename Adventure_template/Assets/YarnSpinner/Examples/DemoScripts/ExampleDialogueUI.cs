@@ -75,19 +75,22 @@ namespace Yarn.Unity.Example {
             // Start by hiding the container, line and option buttons
             if (dialogueContainer != null)
                 dialogueContainer.SetActive(false);
-          //  if (lineText!=null)
-               // lineText.gameObject.SetActive (false);
+            //  if (lineText!=null)
+            // lineText.gameObject.SetActive (false);
+
 
             foreach (var button in optionButtons) {
                 if (button!=null)
                     button.gameObject.SetActive (false);
             }
+           
+
 
             // Hide the continue prompt if it exists
             if (continuePrompt != null)
                 continuePrompt.SetActive (false);
         }
-
+    
         //trying to modify the code below to handle finding correct speaker and attaching speak bubble to him
         /// Show a line of dialogue, gradually
         public override IEnumerator RunLine (Yarn.Line line)
@@ -189,7 +192,6 @@ namespace Yarn.Unity.Example {
                 optionButtons[i].GetComponentInChildren<ToughtParticleSystem>().myText.text = optionString;
                 i++;
             }
-            FindObjectOfType<ToughtsAlign>().AlignToughts();
             // Record that we're using it
             SetSelectedOption = optionChooser;
 
