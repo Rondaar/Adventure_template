@@ -162,7 +162,7 @@ namespace Yarn.Unity.Example {
                 {
                     lineText.text = "";
                 }
-                lineText = speaker.GetComponentInChildren<Text>();
+                lineText = speaker.GetComponent<DialogueText>().MyText;
 
                 if (lineText == null)
                 {
